@@ -13,5 +13,4 @@ sealed class Gender(val name : String)  {
             }
         }
     }
-
 }
