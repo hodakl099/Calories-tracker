@@ -22,7 +22,7 @@ import com.plcoding.onboarding_presentation.components.SelectableButton
 import kotlinx.coroutines.flow.collect
 
 @Composable
-fun ActiviScreen(
+fun GoalScreen(
     onNavigate : (UiEvent.Navigate) -> Unit,
     viewModel: GoalViewModel = hiltViewModel()
 ) {
