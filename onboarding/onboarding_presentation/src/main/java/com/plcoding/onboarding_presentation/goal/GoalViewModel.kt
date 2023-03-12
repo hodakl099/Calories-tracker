@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class  GoalViewModel @Inject constructor(
-    private val preferences: Preferences
+    private val preferences: Preferences,
 ) : ViewModel() {
 
     var selectedGoalType by mutableStateOf<GoalType>(
