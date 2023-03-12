@@ -9,7 +9,7 @@ data class TrackedFood(
     val protein: Int,
     val fat: Int,
     val imageUrl: String?,
-    val type: MealType,
+    val mealType: MealType,
     val amount: Int,
     val date: LocalDate,
     val calories: Int,
