@@ -1,4 +1,4 @@
-package com.plcoding.onboarding_domain.di
+package com.plcoding.onboarding_domain.use_case.di
 
 import com.plcoding.onboarding_domain.use_case.ValidateNutrient
 import dagger.Module
