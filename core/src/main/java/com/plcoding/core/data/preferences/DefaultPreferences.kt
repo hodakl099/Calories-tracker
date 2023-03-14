@@ -1,4 +1,4 @@
-package com.plcoding.core.domain
+package com.plcoding.core.data.preferences
 
 import android.content.SharedPreferences
 import com.plcoding.core.domain.model.ActivityLevel
@@ -64,6 +64,18 @@ class DefaultPreferences (
             .putFloat(Preferences.KEY_FAT_RATIO, ratio)
             .apply()
     }
+    override fun saveShouldShowOnboarding(shouldShow: Boolean) {
+        sharedPreferences.edit()
+            .putBoolean(Preferences.KEY_SHOULD_SHOW_ONBOARDING, shouldShow)
+            .apply()
+    }
+
+    override fun loadShouldShowOnBoarding(): Boolean {
+        return sharedPreferences.getBoolean(
+            Preferences.KEY_SHOULD_SHOW_ONBOARDING,
+            true
+        )
+    }
 
     override fun loadUserInfo(): UserInfo {
         val age = sharedPreferences.getInt(Preferences.KEY_AGE, -1)
@@ -89,4 +101,6 @@ class DefaultPreferences (
             fatRatio = fatRatio
         )
     }
+
+
 }
