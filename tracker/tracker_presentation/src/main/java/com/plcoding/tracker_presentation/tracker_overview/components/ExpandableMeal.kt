@@ -26,24 +26,20 @@ import com.plcoding.tracker_presentation.tracker_overview.Meal
 
 @Composable
 fun ExpandableMeal(
-    meal : Meal,
-    onToggleClick : () -> Unit,
-    content : @Composable () -> Unit,
+    meal: Meal,
+    onToggleClick: () -> Unit,
+    content: @Composable () -> Unit,
     modifier: Modifier
 ) {
-
     val spacing = LocalSpacing.current
     val context = LocalContext.current
-
     Column(
         modifier = modifier
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable {
-                    onToggleClick()
-                }
+                .clickable { onToggleClick() }
                 .padding(spacing.spaceMedium),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -65,13 +61,11 @@ fun ExpandableMeal(
                     )
                     Icon(
                         imageVector = if (meal.isExpanded) {
-                                                           Icons.Default.KeyboardArrowUp
-                                                           }  else Icons.Default.KeyboardArrowDown,
-                        contentDescription = if (meal.isExpanded) {
+                            Icons.Default.KeyboardArrowUp
+                        } else Icons.Default.KeyboardArrowDown,
+                        contentDescription = if(meal.isExpanded) {
                             stringResource(id = R.string.collapse)
-                        } else {
-                            stringResource(id = R.string.extend)
-                        }
+                        } else stringResource(id = R.string.extend)
                     )
                 }
                 Spacer(modifier = Modifier.height(spacing.spaceSmall))
@@ -104,12 +98,11 @@ fun ExpandableMeal(
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(spacing.spaceMedium))
-                AnimatedVisibility(visible = meal.isExpanded) {
-                    content()
-                }
             }
         }
+        Spacer(modifier = Modifier.height(spacing.spaceMedium))
+        AnimatedVisibility(visible = meal.isExpanded) {
+            content()
+        }
     }
-
 }

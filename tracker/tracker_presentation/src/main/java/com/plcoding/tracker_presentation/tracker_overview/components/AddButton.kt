@@ -27,9 +27,7 @@ fun AddButton(
     modifier: Modifier = Modifier,
     color: Color = MaterialTheme.colors.primary
 ) {
-
     val spacing = LocalSpacing.current
-
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(100f))
