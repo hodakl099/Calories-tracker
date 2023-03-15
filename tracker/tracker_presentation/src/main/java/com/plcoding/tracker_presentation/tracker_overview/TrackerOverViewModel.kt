@@ -10,6 +10,7 @@ import com.plcoding.core.domain.preferences.TrackerPreferences
 import com.plcoding.core.navigation.Route
 import com.plcoding.core.util.UiEvent
 import com.plcoding.tracker_domain.use_case.TrackerUseCases
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn
@@ -18,6 +19,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class TrackerOverViewModel @Inject constructor(
     preferences: TrackerPreferences,
     private val trackerUseCases: TrackerUseCases
