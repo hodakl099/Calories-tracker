@@ -65,6 +65,12 @@ class TrackerOverViewModel @Inject constructor(
                 )
                 refreshFood()
             }
+            is TrackerViewEvent.OnPreviousDayClick -> {
+                state = state.copy(
+                    date = state.date.minusDays(1)
+                )
+                refreshFood()
+            }
             is TrackerViewEvent.OnToggleMealClick -> {
                 state = state.copy(
                     meals = state.meals.map {
@@ -77,7 +83,7 @@ class TrackerOverViewModel @Inject constructor(
         }
     }
 
-    private fun refreshFood() {
+    private fun refreshFood()  {
         getFoodsForDateJob?.cancel()
       getFoodsForDateJob =  trackerUseCases
            .getFoodsForDate(state.date)
