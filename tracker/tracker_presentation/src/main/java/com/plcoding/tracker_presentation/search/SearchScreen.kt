@@ -23,6 +23,7 @@ fun SearchScreen(
     scaffoldState: ScaffoldState,
     mealName : String,
     dayOfMonth : Int,
+    month : Int,
     year : Int,
     onNavigateUp : () -> Unit,
     viewModel: SearchViewModel = hiltViewModel()

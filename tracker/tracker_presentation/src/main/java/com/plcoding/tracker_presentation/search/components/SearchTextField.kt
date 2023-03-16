@@ -79,7 +79,10 @@ fun SearchTextField(
                 modifier = Modifier.align(Alignment.CenterStart)
             )
         }
-        IconButton(onClick = onSearch) {
+        IconButton(
+            modifier = Modifier.align(Alignment.CenterEnd),
+            onClick = onSearch
+        ) {
             androidx.compose.material.Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = stringResource(id = R.string.search)
