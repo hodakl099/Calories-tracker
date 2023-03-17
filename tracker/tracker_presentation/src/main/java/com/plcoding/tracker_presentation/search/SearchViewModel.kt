@@ -24,7 +24,7 @@ class SearchViewModel @Inject constructor(
     private val filterOutDigits: FilterOutDigits
 ) : ViewModel() {
     var state by mutableStateOf(SearchState())
-    private set
+        private set
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
@@ -32,9 +32,7 @@ class SearchViewModel @Inject constructor(
     fun onEvent(event: SearchEvent) {
         when(event) {
             is SearchEvent.OnQueryChange -> {
-                state = state.copy(
-                    query = event.query
-                )
+                state = state.copy(query = event.query)
             }
             is SearchEvent.OnAmountForFoodChange -> {
                 state = state.copy(
@@ -48,13 +46,55 @@ class SearchViewModel @Inject constructor(
             is SearchEvent.OnSearch -> {
                 executeSearch()
             }
+            is SearchEvent.OnToggleTrackableFood -> {
+                state = state.copy(
+                    trackableFood = state.trackableFood.map {
+                        if(it.food == event.food) {
+                            it.copy(isExpanded = !it.isExpanded)
+                        } else it
+                    }
+                )
+            }
+            is SearchEvent.OnSearchFocusChange -> {
+                state = state.copy(
+                    isHintVisible = !event.isFocused && state.query.isBlank()
+                )
+            }
             is SearchEvent.OnTrackFoodClick -> {
                 trackFood(event)
             }
         }
     }
 
-    private fun trackFood(event : SearchEvent.OnTrackFoodClick) {
+    private fun executeSearch() {
+        viewModelScope.launch {
+            state = state.copy(
+                isSearching = true,
+                trackableFood = emptyList()
+            )
+            trackerUseCases
+                .searchFood(state.query)
+                .onSuccess { foods ->
+                    state = state.copy(
+                        trackableFood = foods.map {
+                            TrackableFoodUiState(it)
+                        },
+                        isSearching = false,
+                        query = ""
+                    )
+                }
+                .onFailure {
+                    state = state.copy(isSearching = false)
+                    _uiEvent.send(
+                        UiEvent.ShowSnackBar(
+                            UiText.StringRes(R.string.error_something_went_wrong)
+                        )
+                    )
+                }
+        }
+    }
+
+    private fun trackFood(event: SearchEvent.OnTrackFoodClick) {
         viewModelScope.launch {
             val uiState = state.trackableFood.find { it.food == event.food }
             trackerUseCases.trackFood(
@@ -66,37 +106,5 @@ class SearchViewModel @Inject constructor(
             _uiEvent.send(UiEvent.NavigateUp)
         }
     }
-
-    private fun executeSearch() {
-       viewModelScope.launch {
-           state = state.copy(
-               isSearching = true,
-               trackableFood = emptyList()
-           )
-           trackerUseCases
-               .searchFood(state.query)
-               .onSuccess { foods ->
-                   state = state.copy(
-                       trackableFood = foods.map {
-                           TrackableFoodUiState(it)
-                       },
-                       isSearching = false,
-                       query = ""
-                   )
-               }
-               .onFailure {
-                   state = state.copy(
-                       isSearching = false
-                   )
-                   _uiEvent.send(
-                       UiEvent.ShowSnackBar(
-                          UiText.StringRes(R.string.error_something_went_wrong)
-                       )
-                   )
-
-               }
-       }
-    }
-
 
 }

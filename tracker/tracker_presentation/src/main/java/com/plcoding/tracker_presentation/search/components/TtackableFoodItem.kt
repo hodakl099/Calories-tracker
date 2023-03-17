@@ -29,12 +29,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.plcoding.core_ui.LocalSpacing
 import com.plcoding.tracker_presentation.R
 import com.plcoding.tracker_presentation.comopnents.NutrientInfo
 import com.plcoding.tracker_presentation.search.TrackableFoodUiState
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun TrackableFoodItem(
     trackableFoodItem : TrackableFoodUiState,
