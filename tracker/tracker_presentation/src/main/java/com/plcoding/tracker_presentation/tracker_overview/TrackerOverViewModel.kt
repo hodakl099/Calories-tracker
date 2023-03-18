@@ -35,6 +35,7 @@ class TrackerOverViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
     init {
+        refreshFood()
         preferences.saveShouldShowOnboarding(false)
     }
 

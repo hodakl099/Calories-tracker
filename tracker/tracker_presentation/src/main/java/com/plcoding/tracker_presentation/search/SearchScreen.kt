@@ -72,11 +72,13 @@ fun SearchScreen(
                 viewModel.onEvent(SearchEvent.OnQueryChange(it))
             },
             onSearch = {
+                keyboardController?.hide()
                 viewModel.onEvent(SearchEvent.OnSearch)
             },
             onFocusedChange = {
                 viewModel.onEvent(SearchEvent.OnSearchFocusChange(it.isFocused))
-            }
+            },
+            shouldShowHint = state.isHintVisible
         )
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
         LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -92,6 +94,7 @@ fun SearchScreen(
                         ))
                     },
                     onTrack = {
+                        keyboardController?.hide()
                         viewModel.onEvent(
                             SearchEvent.OnTrackFoodClick(
                                 food = food.food,
