@@ -1,7 +1,6 @@
 package com.plcoding.onboarding_presentation.height
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -22,14 +21,14 @@ import kotlinx.coroutines.flow.collect
 fun HeightScreen(
     scaffoldState : ScaffoldState,
     viewModel: HeightViewModel = hiltViewModel(),
-    onNavigate : (UiEvent.Navigate) -> Unit
+    onNextClick : () -> Unit
 ) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect {  event ->
             when(event){
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.Success -> onNextClick()
                 is UiEvent.ShowSnackBar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                        message = event.message.asString(context)

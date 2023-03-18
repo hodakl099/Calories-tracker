@@ -73,11 +73,11 @@ fun SearchTextField(
         )
         if (shouldShowHint) {
             Text(
-                text = text,
+                text = hint,
                 style = MaterialTheme.typography.body1,
                 fontWeight = FontWeight.Light,
                 color = Color.LightGray,
-                modifier = Modifier.align(Alignment.CenterStart)
+                modifier = Modifier.align(Alignment.CenterStart).padding(start = spacing.spaceSmall)
             )
         }
         IconButton(

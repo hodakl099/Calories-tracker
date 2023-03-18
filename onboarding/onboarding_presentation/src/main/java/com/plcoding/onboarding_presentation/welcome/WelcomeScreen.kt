@@ -8,15 +8,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.plcoding.core.R
-import com.plcoding.core.navigation.Route
-import com.plcoding.core.util.UiEvent
 import com.plcoding.core_ui.LocalSpacing
 import com.plcoding.onboarding_presentation.components.ActionButton
 
 
 @Composable
 fun WelcomeScreen(
-    onNavigate : (UiEvent.Navigate) -> Unit
+    onNextClick : () -> Unit
     ) {
     val dimens = LocalSpacing.current
     Column(
@@ -32,7 +30,7 @@ fun WelcomeScreen(
         Spacer(modifier = Modifier.height(dimens.spaceMedium))
         ActionButton(
             onClick = {
-                      onNavigate(UiEvent.Navigate(Route.GENDER_ROUTE))
+                      onNextClick()
             },
             text = stringResource(id = R.string.next),
             modifier = Modifier.align(Alignment.CenterHorizontally)

@@ -1,7 +1,7 @@
 package com.plcoding.core.util
 
 sealed class UiEvent{
-    data class Navigate(val route : String) : UiEvent()
+    object Success : UiEvent()
     data class ShowSnackBar(val message : UiText) : UiEvent()
     object NavigateUp : UiEvent()
 }

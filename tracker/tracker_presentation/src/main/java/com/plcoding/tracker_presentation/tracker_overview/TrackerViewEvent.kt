@@ -8,6 +8,5 @@ sealed class TrackerViewEvent {
     object OnPreviousDayClick : TrackerViewEvent()
     data class OnToggleMealClick(val meal : Meal) : TrackerViewEvent()
     data class OnDeleteTrackedFoodClick(val trackedFood: TrackedFood) : TrackerViewEvent()
-    data class OnAddFoodClick(val meal: Meal) : TrackerViewEvent()
 
 }
