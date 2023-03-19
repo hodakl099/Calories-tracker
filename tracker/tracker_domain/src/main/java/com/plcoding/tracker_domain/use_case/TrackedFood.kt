@@ -7,7 +7,7 @@ import com.plcoding.tracker_domain.repository.TrackerRepository
 import java.time.LocalDate
 import kotlin.math.roundToInt
 
-class TrackFood(
+class TrackedFood(
     private val repository: TrackerRepository
 ) {
 

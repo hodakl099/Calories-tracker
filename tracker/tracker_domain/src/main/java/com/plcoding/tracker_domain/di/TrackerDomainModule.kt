@@ -8,7 +8,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
-import javax.inject.Singleton
 
 
 @Module
@@ -26,7 +25,7 @@ object TrackerDomainModule {
             deleteTrackedFood = DeleteTrackedFood(repository),
             getFoodsForDate = GetFoodsForDate(repository),
             searchFood = SearchFood(repository),
-            trackFood = TrackFood(repository)
+            trackFood = TrackedFood(repository)
         )
     }
 }

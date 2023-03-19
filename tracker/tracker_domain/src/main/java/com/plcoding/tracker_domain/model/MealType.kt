@@ -1,5 +1,7 @@
 package com.plcoding.tracker_domain.model
 
+import java.util.*
+
 sealed class MealType(val name: String) {
     object BreakFast : MealType("breakfast")
     object Lunch : MealType("lunch")
@@ -9,7 +11,7 @@ sealed class MealType(val name: String) {
 
     companion object {
         fun fromString(name: String) : MealType {
-            return when(name) {
+            return when(name.lowercase(Locale.ROOT)) {
                 "breakfast" -> BreakFast
                 "lunch" -> Lunch
                 "dinner" -> Dinner
